@@ -1,0 +1,109 @@
+generated: '2026-07-25'
+method: searched
+source: https://instanda.com/platform-security
+notes: >-
+  INSTANDA publishes a substantive first-party security and compliance posture on
+  instanda.com/platform-security and links a third-party trust centre hosted by
+  Trustero. The certification claims below are quoted from that page. The API and
+  data-format standards below are asserted only where INSTANDA itself names them
+  in public copy; every one of them is realised inside a licensed tenant, so
+  conformance is claimed by the vendor and cannot be independently verified from
+  outside. Nothing was inferred from a spec, because no spec is publicly
+  retrievable.
+compliance_program:
+  published: true
+  url: https://instanda.com/platform-security
+  trust_center: https://app.trustero.com/trust/instanda
+standards:
+- id: iso-27001
+  conforms: true
+  evidence: 'instanda.com/platform-security names ISO 27001:2022 certification'
+  version: '2022'
+  verification: vendor-published claim
+- id: soc2
+  conforms: true
+  evidence: instanda.com/platform-security names SOC 2 (Systems and Organization Controls 2)
+  verification: vendor-published claim; report not publicly downloadable
+- id: cyber-essentials
+  conforms: true
+  evidence: instanda.com/platform-security names Cyber Essentials Certification
+  jurisdiction: United Kingdom (NCSC scheme)
+  verification: vendor-published claim
+- id: pci-dss
+  conforms: true
+  evidence: instanda.com/platform-security names PCI DSS SAQ A
+  scope: SAQ A - card data fully outsourced to a validated third-party payment provider
+  verification: vendor-published claim
+- id: gdpr
+  conforms: partial
+  evidence: >-
+    A UK/EU privacy policy is published at instanda.com/privacy-policy and
+    instanda.com/cloud states client data is stored "in required geographies to
+    meet regional regulations"; the platform-security page itself does not name
+    GDPR.
+  verification: inferred from published privacy policy and data-residency copy
+- id: openapi
+  conforms: partial
+  evidence: >-
+    INSTANDA states the platform describes its REST interfaces with Swagger
+    definitions and press coverage describes an API framework built on "the
+    Microsoft Azure preferred interface definition language, Swagger". A Swagger
+    UI route is registered at design.instanda.com/swagger/index.html but is
+    authentication-gated. Swagger/OpenAPI version is not published.
+  verification: vendor-published claim plus a gated-route probe; no document retrievable
+- id: wsdl-soap
+  conforms: true
+  evidence: >-
+    instanda.com/cloud - "You can connect through REST or SOAP services using
+    Swagger or WSDL definitions."
+  verification: vendor-published claim; no public WSDL located
+- id: webhooks
+  conforms: true
+  evidence: >-
+    Event Webhooks are advertised on instanda.com/cloud and published as a
+    monitored component on status.instanda.com with a verbatim HTTP POST
+    description.
+  verification: vendor-published claim; no catalog or schema
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document was found on any INSTANDA host.
+- id: acord
+  conforms: false
+  evidence: >-
+    No mention of ACORD, AL3, ACORD XML, NGDS, ACORD certification, IVANS or
+    agency download anywhere on instanda.com. The nearest broker-system seam is
+    an Applied Systems (Applied TAM) partner listing, described as an INSTANDA
+    integration rather than as ACORD-standard messaging.
+- id: oauth2
+  conforms: unknown
+  evidence: >-
+    No OAuth 2.0 metadata is served. /.well-known/oauth-authorization-server and
+    /.well-known/openid-configuration 404 on instanda.com and api.instanda.com,
+    and 302 to a broken-link handler on design.instanda.com. Auth0, Okta, Duo and
+    Microsoft Entra ID appear in the partner directory as customer-supplied IdPs,
+    which implies OIDC/SAML federation into tenants but documents nothing.
+- id: openid-connect
+  conforms: unknown
+  evidence: >-
+    Same as oauth2 - identity partners are listed but no discovery document is
+    served on any first-party host.
+- id: rfc9457-problem-details
+  conforms: unknown
+  evidence: No public error contract is published; api.instanda.com answers anonymous GET with a bare 403 and an empty body.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on instanda.com and api.instanda.com and 302 to /Public/BrokenLink on design.instanda.com.
+- id: hsts
+  conforms: true
+  evidence: 'Strict-Transport-Security: max-age=31536000 observed on instanda.com and design.instanda.com'
+- id: dmarc
+  conforms: true
+  evidence: DMARC record present with policy quarantine (see security/instanda-domain-security.yml)
+- id: dnssec
+  conforms: false
+  evidence: No DNSSEC on instanda.com (see security/instanda-domain-security.yml)
+certifications:
+- ISO 27001:2022
+- SOC 2
+- Cyber Essentials
+- PCI DSS SAQ A

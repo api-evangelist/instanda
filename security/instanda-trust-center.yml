@@ -1,0 +1,53 @@
+generated: '2026-07-25'
+method: searched
+probe: true
+url: https://app.trustero.com/trust/instanda
+hosted_by: Trustero (third-party trust-centre platform)
+first_party_security_page: https://instanda.com/platform-security
+http_status: 200
+machine_readable: false
+note: >-
+  The Trustero trust centre is linked from the instanda.com footer and returns
+  HTTP 200, but it is a client-rendered React application - the served HTML is an
+  empty shell with the title "Trustero" and no certification text, so its contents
+  cannot be harvested without executing JavaScript. The certifications recorded
+  below are therefore taken from INSTANDA's own first-party security page at
+  instanda.com/platform-security, not scraped from Trustero.
+certifications:
+- ISO 27001:2022
+- SOC 2
+- Cyber Essentials
+- PCI DSS SAQ A
+controls_published:
+  encryption_at_rest: AES-256 (Azure full disk encryption)
+  encryption_in_transit: AES-256 SSL certificates
+  siem: true
+  dlp: true
+  waf: machine-learning web application firewall
+  firewall: next-generation firewall with SSL VPN, deep-packet inspection, intrusion detection/prevention
+  ssdlc: >-
+    "Our Secure Software Development Lifecycle (SSDLC) includes secure code
+    reviews, vulnerability assessments, full penetration testing, and threat
+    modeling."
+  hosting: Microsoft Azure
+  data_residency: client data stored in required geographies to meet regional regulations
+gaps:
+  security_contact_published: false
+  vulnerability_disclosure_policy: false
+  security_txt: false
+  subprocessor_list_public: false
+  audit_reports_downloadable: false
+  note: >-
+    No security@ address, no responsible-disclosure or bug-bounty page, and no
+    RFC 9116 security.txt was found on any INSTANDA host. Named certifications
+    are claimed but no report or certificate is publicly downloadable.
+evidence:
+- source: https://instanda.com/platform-security
+  status: 200
+  kind: first-party-security-page
+  keywords: [iso 27001:2022, soc 2, cyber essentials, pci dss saq a, ssdlc, penetration testing, siem, dlp, waf]
+- source: https://app.trustero.com/trust/instanda
+  status: 200
+  kind: hosted-trust-center
+  keywords: []
+  note: JavaScript-rendered shell; no keywords extractable from served HTML.

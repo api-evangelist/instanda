@@ -1,0 +1,97 @@
+generated: '2026-07-25'
+method: searched
+source: https://status.instanda.com/
+notes: >-
+  INSTANDA publishes no public versioning policy, no deprecation policy and no
+  public SLA document, because there is no public developer surface to version.
+  It does, however, run a real first-party public status page - discovered this
+  round via DNS (status.instanda.com CNAMEs to SorryApp) and confirmed at HTTP
+  200 - which exposes component-level health for four hosting regions. That
+  status page is the single richest public description of the platform's
+  operational surface, and it is where the "Event Webhooks" capability is
+  described in first-party words.
+status_page: https://status.instanda.com/
+status_page_detail:
+  provider: Sorry™ (sorryapp.com)
+  title: INSTANDA Status
+  http_status: 200
+  probed: '2026-07-25'
+  headline_observed: All Core Systems Are Go!
+  subscribe_channels:
+  - email
+  - slack
+  incident_history_feed: none published (/history, /rss, /feed, /atom.xml all 404)
+  support_route: https://support.instanda.com/
+  regions:
+  - code: AU
+    label: AU Region
+    description: Australia
+  - code: EMEA
+    label: EMEA Region
+    description: EMEA
+  - code: JP
+    label: JP Region
+    description: Japan
+  - code: NA
+    label: NA Region
+    description: North America
+  component_pattern: >-
+    Each region publishes Design, Production sites and ODS components, plus a
+    nested "Production Components" group. Online Payments is published for AU,
+    EMEA and NA. Event Webhooks is published under the NA region only.
+  production_components:
+  - Claims
+  - Emails
+  - New Business Emails
+  - Quote Emails
+  - Referral Emails
+  - Endorsements
+  - Multi Items
+  - MTAs
+  - Quote Engine
+  - Referrals
+  - Renewals
+  - Reports
+  region_level_components:
+  - Design
+  - Production sites
+  - ODS
+  - Online Payments
+  - Event Webhooks
+versioning:
+  scheme: undocumented
+  current: null
+  docs: null
+  note: >-
+    No public versioning policy. INSTANDA states the platform generates per-product
+    REST/SOAP interfaces described with Swagger or WSDL definitions inside a
+    customer tenant, so the contract version is a per-tenant, per-product artifact
+    rather than a published global API version.
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: No public deprecation or sunset policy was found on instanda.com or any probed host.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No uptime target or SLA percentage is published. instanda.com/cloud describes
+    the availability posture qualitatively - "All cloud hosting regions are
+    geo-replicated in real-time, providing a dependable failover capability within
+    your local geography", Azure point-in-time backup, and "automatic traffic
+    management routing" - which the DNS evidence corroborates
+    (*.instanda.com resolves through instanda.trafficmanager.net to
+    production-eu-primary.northeurope.cloudapp.azure.com).
+deprecated_operations: []
+evidence:
+- source: https://status.instanda.com/
+  status: 200
+  kind: status-page
+  note: SorryApp-hosted, component-level, four regions, publicly readable with no login.
+- source: https://instanda.com/cloud
+  status: 200
+  kind: availability-posture
+  note: Geo-replication, Azure point-in-time backup and traffic-manager routing described in first-party copy.
+- source: dig status.instanda.com
+  kind: dns
+  note: CNAME chain fa847fa1.sorryapp.com -> dualstack.n.sni.global.fastly.net.

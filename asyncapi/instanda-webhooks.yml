@@ -1,0 +1,58 @@
+generated: '2026-07-25'
+method: searched
+source: https://status.instanda.com/
+spec_type: none
+asyncapi_published: false
+webhooks:
+  exists: true
+  advertised: true
+  documented: false
+  name: Event Webhooks
+  description_verbatim: >-
+    Event Webhooks allow Instanda to send information to another system. When an
+    event happens, such as an update to a policy, Instanda will HTTP POST the
+    information to a URL of your choice.
+  description_source: https://status.instanda.com/
+  transport: https
+  method: POST
+  delivery: provider-to-subscriber HTTP POST to a subscriber-supplied URL
+  subscriber_url: customer-configured ("a URL of your choice")
+  named_event_example: an update to a policy
+  operational_component: >-
+    "Event Webhooks" is published as a first-class component on the INSTANDA
+    public status page under the NA region, meaning the webhook fan-out is a
+    separately monitored platform service rather than an undifferentiated part of
+    the application.
+  catalog_published: false
+  payload_schemas_published: false
+  signing_or_auth_documented: false
+  retry_policy_documented: false
+notes: >-
+  This is a Webhooks record, not an AsyncAPI record. INSTANDA ships a real,
+  publicly advertised webhook surface but publishes no AsyncAPI document, no
+  event catalog, no payload schemas, no signature scheme and no retry semantics.
+  Two independent first-party sources name the surface: the marketing/platform
+  page instanda.com/cloud ("WebHooks handle real-time customer event
+  notifications") and the public status page, which additionally carries the
+  verbatim behavioural description captured above. Everything beyond that -
+  the event list, the payload shape, the security model - is only visible inside
+  a licensed tenant. Nothing here is inferred; no event names beyond the single
+  documented example are recorded, because none are published.
+events:
+- name: policy update
+  source: https://status.instanda.com/
+  verbatim: 'When an event happens, such as an update to a policy'
+  note: >-
+    The only concrete event INSTANDA names publicly, and it is given as an
+    example rather than as a catalog entry. No event key, no payload schema.
+evidence:
+- source: https://status.instanda.com/
+  status: 200
+  kind: status-page-component
+  note: '"Event Webhooks" component with the verbatim description recorded above.'
+- source: https://instanda.com/cloud
+  status: 200
+  kind: platform-page
+  verbatim: >-
+    You can connect through REST or SOAP services using Swagger or WSDL
+    definitions, while WebHooks handle real-time customer event notifications.

@@ -1,0 +1,47 @@
+generated: '2026-07-25'
+method: searched
+result: none
+note: >-
+  Probed the full /.well-known/ discovery surface on every first-party INSTANDA
+  host known to exist: the marketing apex, the live API host, and the tenant
+  configuration host discovered this round via instanda.com/robots.txt. Not one
+  document is served. This file is an audit record of that negative result - no
+  WellKnown pointer is wired into apis.yml, because there is nothing to point at.
+  Note the discriminator on design.instanda.com: unknown paths hard-404, whereas
+  /.well-known/* 302s to /Public/BrokenLink, which is the ASP.NET application's
+  own broken-link handler rather than a served document.
+hosts:
+- host: https://instanda.com
+  role: marketing apex (HubSpot CMS)
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /llms.txt, status: 404}
+  - {path: /robots.txt, status: 200, note: 'names the sitemap and disallows https://design.instanda.com/ - the lead that exposed the tenant host'}
+- host: https://api.instanda.com
+  role: live API host (anonymous GET returns 403, empty body)
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /llms.txt, status: 404}
+  - {path: /robots.txt, status: 404}
+- host: https://design.instanda.com
+  role: tenant product-configuration application (ASP.NET, forms auth)
+  documents:
+  - {path: /.well-known/security.txt, status: 302, redirect: /Public/BrokenLink, effective: not-served}
+  - {path: /.well-known/openid-configuration, status: 302, redirect: /Public/BrokenLink, effective: not-served}
+  - {path: /.well-known/oauth-authorization-server, status: 302, redirect: /Public/BrokenLink, effective: not-served}
+  - {path: /llms.txt, status: 404}
+  - {path: /robots.txt, status: 200}
+security_txt: null
+openid_configuration: null
+oauth_authorization_server: null
+api_catalog: null

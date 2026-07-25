@@ -13,15 +13,21 @@ description: >-
   and casualty, life and health, and specialty lines across the UK, EMEA, North
   America and APAC, and it is architected on Microsoft Azure. INSTANDA markets itself
   as "API-first" and its platform does generate per-product REST/SOAP interfaces
-  described with Swagger or WSDL definitions, plus webhooks for customer event
-  notifications - but none of that is public. There is no first-party developer
-  portal: developer, developers, docs and api-docs subdomains all return 404,
-  api.instanda.com resolves but answers 403 with no documentation, and the only
-  documentation surface, support.instanda.com, is a Freshdesk login wall. Quote,
-  bind, issue and FNOL all exist as platform capabilities, but every one of them is
-  reachable only through a licensed tenant or a partner integration. This record is
-  deliberately a stub: the honest finding is a partner-gated core system with no
-  public self-serve API.
+  described with Swagger or WSDL definitions, plus Event Webhooks that HTTP POST
+  customer event notifications to a subscriber-supplied URL - but none of that
+  contract is public. There is no first-party developer portal: developer,
+  developers, docs and api-docs subdomains all return 404, api.instanda.com
+  resolves but answers anonymous requests with a bare 403, and support.instanda.com
+  is a Freshdesk login wall. The Swagger surface has been located and it is gated -
+  design.instanda.com/swagger/index.html is a registered route that redirects to the
+  platform log-on page, while unknown paths on the same host hard-404. What INSTANDA
+  does publish openly is a component-level status page at status.instanda.com
+  covering four hosting regions, and a certification set of ISO 27001:2022, SOC 2,
+  Cyber Essentials and PCI DSS SAQ A. Quote, bind, issue and FNOL all exist as
+  platform capabilities - the status page names Quote Engine, Referrals, Renewals,
+  MTAs, Endorsements and Claims as monitored services - but every one of them is
+  reachable only through a licensed tenant or a partner integration. The honest
+  finding is a partner-gated insurance core system with no public self-serve API.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Insurance
@@ -38,11 +44,16 @@ tags:
 - Core Systems
 - MGA
 - Broker
+- Webhooks
+- Microsoft Azure
+- Embedded Insurance
 created: '2026-07-25'
 modified: '2026-07-25'
 specificationVersion: '0.19'
 apis: []
 common:
+- type: DomainSecurity
+  url: security/instanda-domain-security.yml
 - type: Website
   url: https://instanda.com/
 - type: Blog
@@ -55,10 +66,28 @@ common:
   url: https://instanda.com/partners
 - type: Support
   url: https://support.instanda.com/
+- type: StatusPage
+  url: https://status.instanda.com/
+- type: Lifecycle
+  url: lifecycle/instanda-lifecycle.yml
+- type: Webhooks
+  url: asyncapi/instanda-webhooks.yml
+- type: Conformance
+  url: conformance/instanda-conformance.yml
+- type: Compliance
+  url: https://instanda.com/platform-security
 - type: TrustCenter
   url: https://app.trustero.com/trust/instanda
+- type: TrustCenter
+  url: security/instanda-trust-center.yml
 - type: Security
   url: https://instanda.com/platform-security
+- type: LLMsTxt
+  url: llms/instanda-llms.txt
+- type: GitHubOrganization
+  url: https://github.com/instanda
+- type: Login
+  url: https://design.instanda.com/Account/LogOn
 - type: PrivacyPolicy
   url: https://instanda.com/privacy-policy
 - type: TermsOfService
