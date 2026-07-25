@@ -1,0 +1,234 @@
+aid: instanda
+name: INSTANDA
+review:
+  question: Does INSTANDA publish a public, self-serve developer portal and downloadable
+    API definitions for its insurance platform?
+  answer: false
+  date: '2026-07-25'
+  reviewer: API Evangelist
+  homeMarket: United Kingdom
+  tier: core-systems
+  gated: true
+findings:
+  summary: |
+    INSTANDA (legal entity F2X Group Limited, England and Wales no. 05236974,
+    HQ 70 Gracechurch Street, London EC3V 0HR) is a no-code insurance policy
+    administration and digital distribution platform sold to carriers, MGAs and
+    brokers. It markets itself as "API-first, cloud-native", and that claim is
+    real at the product level - the platform emits per-product REST/SOAP
+    interfaces described with Swagger or WSDL definitions, supports API call-out
+    rating steps, and fires webhooks on customer events - but NONE of it is
+    publicly documented. There is no first-party developer portal, no public API
+    reference, no downloadable OpenAPI or Swagger file, no public GraphQL or gRPC
+    surface, and no first-party Postman workspace. The only integration route is
+    a licensed tenant or a partner/implementation engagement. This is the classic
+    core-systems posture in insurance: the API exists, the buyer is an insurer,
+    and the developer never sees it from the outside.
+  developerPortal:
+    exists: false
+    url: ''
+    classification: none - no developer portal of any kind was found; the only
+      documentation surface is a support login wall
+  acordPosture: no ACORD reference found; broker seam via Applied Systems (Applied
+    TAM) integration
+  acordDetail: |
+    No mention of ACORD, AL3, ACORD XML, NGDS, ACORD certification, IVANS, agency
+    download, Applied Epic or Vertafore AMS360 was found anywhere on instanda.com
+    (homepage, platform-overview, cloud, policy-administration, product-creation,
+    digital-distribution, reporting, property-and-casualty, life-and-health,
+    carriers, mga, partners, our-company, platform-security, or the US
+    solution/create and solution/distribute pages), nor in press coverage. The
+    closest thing to the agency/broker-management seam is the partner directory,
+    which lists Applied Systems' Applied TAM broker management system under an
+    "Agency Management System" / "Broker System" category, alongside data
+    providers (LexisNexis, Verisk, TransUnion, CoreLogic, Guidewire HazardHub) and
+    reinsurance underwriting (Swiss Re Magnum). Interfaces to those systems are
+    described as INSTANDA integrations, never as ACORD-standard messaging.
+  insuranceVerbs:
+    quote:
+      supported: true
+      exposure: partner-gated
+      note: Rating engine with multi-dimensional rate tables, formulas, conditional
+        rates and API-call-out rating steps; bureau agnostic (ISO, AAIS, MSO, NCCI)
+        for US insurers. Producer portals let agents quote new business. No public
+        quote API is documented.
+    bind:
+      supported: true
+      exposure: partner-gated
+      note: "Policyholders can 'seamlessly quote and bind policies'; embedded/headless
+        distribution can 'easily embed on websites via API' and 'quote and bind via
+        chat and voicebot' (instanda.com/us/solution/distribute/). The API is real but
+        is provisioned per tenant, not published."
+    issue:
+      supported: true
+      exposure: partner-gated
+      note: Policy administration, endorsements, renewals, documents and billing are
+        core platform functions; straight-through processing and automated renewals
+        are configured, not called from a public API.
+    fnol:
+      supported: true
+      exposure: partner-gated
+      note: "'Submit a First Notice of Loss (FNOL)' is listed as a policyholder
+        capability, and 'dynamic quote and FNOL questions' as a configurable rules
+        feature. No public FNOL API or schema is published."
+  authModel:
+    scheme: undocumented
+    note: |
+      No public authentication documentation exists. api.instanda.com is live but
+      answers GET / with 403 Forbidden (empty body, no WWW-Authenticate challenge,
+      CSP frame-ancestors 'none'); every documentation path probed under it 404s.
+      Neither /.well-known/openid-configuration nor
+      /.well-known/oauth-authorization-server is served (both 404). The customer
+      support portal (support.instanda.com) 302-redirects to Freshworks OAuth
+      (instandaeu.freshworks.com), which authenticates support users, not API
+      clients. Separately, the partner directory lists Auth0, Okta, Duo and
+      Microsoft Entra ID under "Authentication & Identity Management", indicating
+      customer-supplied IdPs front the platform - but that is an integration list,
+      not a documented auth scheme for a public API.
+  webhooks:
+    exists: true
+    documented: false
+    note: "instanda.com/cloud states plainly: 'You can connect through REST or SOAP
+      services using Swagger or WSDL definitions, while WebHooks handle real-time
+      customer event notifications.' No public event catalog, no AsyncAPI document,
+      no payload schemas."
+  specifications:
+    openapiHarvested: false
+    specsCount: 0
+    note: |
+      Zero OpenAPI/Swagger documents could be harvested. INSTANDA's own copy says
+      the platform uses Swagger definitions, and press coverage of its API
+      framework describes it as built on "the Microsoft Azure preferred interface
+      definition language, Swagger", but those definitions are generated per
+      configured insurance product inside a customer tenant. Nothing is served
+      publicly: /swagger, /swagger/index.html, /swagger/v1/swagger.json,
+      /openapi.json, /api-docs, /docs and /help under api.instanda.com all return
+      404. The openapi/ directory is therefore intentionally absent from this repo.
+  postman:
+    firstParty: false
+    note: A public Postman workspace named "Instanda" exists (slug "instanda",
+      created 2023-05-02) but it is published by a third-party individual account,
+      not by INSTANDA, and contains zero collections. Not treated as a provider
+      artifact.
+  graphql:
+    exists: false
+    note: No /graphql surface found; nothing to introspect.
+  grpc:
+    exists: false
+    note: No published .proto files found.
+  sourceCode:
+    githubOrganization: https://github.com/instanda
+    note: The GitHub account exists (HTTP 200) but exposes no public repositories,
+      so there is no SDK, sample code or spec to harvest from it.
+  transports:
+  - protocol: REST
+    scheme: https
+    documented: false
+    note: Product-level REST interfaces described with Swagger definitions, generated
+      per configured product inside a customer tenant. api.instanda.com is live but
+      returns 403 to anonymous requests and publishes no reference.
+  - protocol: SOAP
+    scheme: https
+    documented: false
+    note: SOAP services with WSDL definitions are offered as an alternative connection
+      style per instanda.com/cloud. No public WSDL was located.
+  - protocol: Webhooks
+    scheme: https
+    documented: false
+    note: Real-time customer event notifications, named on the marketing site, with
+      no public catalog or schema.
+  - protocol: GraphQL
+    documented: false
+    note: Not offered.
+  - protocol: gRPC
+    documented: false
+    note: Not offered.
+probes:
+- url: https://instanda.com/
+  status: 200
+  note: Marketing site (HubSpot CMS). www.instanda.com 301s to the apex.
+- url: https://developer.instanda.com/
+  status: 404
+- url: https://developers.instanda.com/
+  status: 404
+- url: https://docs.instanda.com/
+  status: 404
+- url: https://api-docs.instanda.com/
+  status: 404
+- url: https://developerhub.instanda.com/
+  status: 404
+- url: https://api.instanda.com/
+  status: 403
+  note: Live API host, anonymous GET refused with an empty 403; no WWW-Authenticate
+    header, no documentation, no OpenAPI. This is the gate.
+- url: https://api.instanda.com/swagger/v1/swagger.json
+  status: 404
+- url: https://api.instanda.com/openapi.json
+  status: 404
+- url: https://api.instanda.com/api-docs
+  status: 404
+- url: https://api.instanda.com/.well-known/openid-configuration
+  status: 404
+- url: https://api.instanda.com/.well-known/oauth-authorization-server
+  status: 404
+- url: https://instanda.com/developers
+  status: 404
+- url: https://instanda.com/api
+  status: 404
+- url: https://instanda.com/developer
+  status: 404
+- url: https://instanda.com/integrations
+  status: 404
+- url: https://instanda.com/partners
+  status: 200
+  note: Real integration directory (integration partners, implementation partners,
+    industry organizations) - marketing, not developer documentation.
+- url: https://support.instanda.com/
+  status: 302
+  note: Redirects to https://support.instanda.com/support/login and then to Freshworks
+    OAuth. Login wall - customer knowledge base, not a public developer portal.
+- url: https://instanda.com/.well-known/security.txt
+  status: 404
+- url: https://app.trustero.com/trust/instanda
+  status: 200
+  note: Third-party hosted trust centre linked from the site footer.
+sources:
+- url: https://instanda.com/cloud
+  type: Documentation
+  note: "First-party statement of the integration model: 'You can connect through REST
+    or SOAP services using Swagger or WSDL definitions, while WebHooks handle real-time
+    customer event notifications.'"
+- url: https://instanda.com/us/solution/distribute/
+  type: Documentation
+  note: Names quote, bind, policy changes, billing, document viewing and FNOL as
+    policyholder capabilities, and headless/embedded distribution "via API".
+- url: https://instanda.com/us/solution/create/
+  type: Documentation
+  note: Rating engine detail including API-call-out rating steps and bureau-agnostic
+    rating (ISO, AAIS, MSO, NCCI); "automate third-party API mapping".
+- url: https://instanda.com/partners
+  type: Partners
+  note: Integration ecosystem directory; source for the Applied Systems (Applied TAM)
+    broker management system link and the identity/data/payment partner set.
+- url: https://instanda.com/our-company
+  type: Website
+  note: "Company facts: co-founders Tim Hardcastle (CEO) and Derek Hill (Group CRO),
+    platform created 2015, $45M funding secured in 2022; footer carries F2X Group
+    Limited registration and the London EC3V 0HR address."
+- url: https://instanda.com/news/new-microsoft-aligned-api-framework-set-to-transform-insurance-digital-ecosystems/
+  type: News
+  status: 200
+  note: URL still resolves but now renders the Resource Hub index rather than the
+    article body; the article is cited in search indexes as describing an API
+    framework built on "the Microsoft Azure preferred interface definition language,
+    Swagger", letting business users create external APIs for products hosted in
+    INSTANDA. Recorded as an attributed claim, not as harvested first-party text.
+actions:
+  apisListed: 0
+  openapiDirectoryCreated: false
+  reason: |
+    apis[] is intentionally empty. INSTANDA publishes no documented, publicly
+    reachable API, so listing one would be fabrication. The accurate record is a
+    partner-gated core system whose API surface is generated per tenant and never
+    exposed. Re-review if INSTANDA ever launches a public developer portal or
+    publishes product Swagger definitions outside a customer tenant.

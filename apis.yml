@@ -1,0 +1,72 @@
+aid: instanda
+url: https://raw.githubusercontent.com/api-evangelist/instanda/refs/heads/main/apis.yml
+name: INSTANDA
+kind: company
+description: >-
+  INSTANDA is a London-headquartered no-code insurance core-systems vendor, trading
+  as F2X Group Limited (England and Wales no. 05236974) from 70 Gracechurch Street in
+  the City of London, a few streets from Lloyd's. Founded in 2015 by Tim Hardcastle
+  (CEO) and Derek Hill (Group CRO), it sells a cloud-native policy administration and
+  digital distribution platform to insurance carriers, MGAs and brokers, letting
+  business users configure products, rating, rules, documents, agent/broker portals
+  and direct-to-consumer journeys without writing code. Its footprint spans property
+  and casualty, life and health, and specialty lines across the UK, EMEA, North
+  America and APAC, and it is architected on Microsoft Azure. INSTANDA markets itself
+  as "API-first" and its platform does generate per-product REST/SOAP interfaces
+  described with Swagger or WSDL definitions, plus webhooks for customer event
+  notifications - but none of that is public. There is no first-party developer
+  portal: developer, developers, docs and api-docs subdomains all return 404,
+  api.instanda.com resolves but answers 403 with no documentation, and the only
+  documentation surface, support.instanda.com, is a Freshdesk login wall. Quote,
+  bind, issue and FNOL all exist as platform capabilities, but every one of them is
+  reachable only through a licensed tenant or a partner integration. This record is
+  deliberately a stub: the honest finding is a partner-gated core system with no
+  public self-serve API.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Insurance
+- United Kingdom
+- Insurtech
+- Policy Administration
+- Underwriting
+- Claims
+- Property and Casualty
+- Life Insurance
+- Health Insurance
+- Digital Distribution
+- No Code
+- Core Systems
+- MGA
+- Broker
+created: '2026-07-25'
+modified: '2026-07-25'
+specificationVersion: '0.19'
+apis: []
+common:
+- type: Website
+  url: https://instanda.com/
+- type: Blog
+  url: https://instanda.com/blog
+- type: BlogRSS
+  url: https://instanda.com/blog/rss.xml
+- type: News
+  url: https://instanda.com/news
+- type: Partners
+  url: https://instanda.com/partners
+- type: Support
+  url: https://support.instanda.com/
+- type: TrustCenter
+  url: https://app.trustero.com/trust/instanda
+- type: Security
+  url: https://instanda.com/platform-security
+- type: PrivacyPolicy
+  url: https://instanda.com/privacy-policy
+- type: TermsOfService
+  url: https://instanda.com/terms-and-conditions
+- type: ContactUs
+  url: https://instanda.com/contact-us
+- type: LinkedIn
+  url: https://uk.linkedin.com/company/instanda
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
